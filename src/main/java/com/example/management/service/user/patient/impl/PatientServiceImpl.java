@@ -37,12 +37,12 @@ public class PatientServiceImpl implements PatientService {
                         + patientResponseDTO.getUsername()));
 
         Patient patient = new Patient();
-        patient.setPatient_name(patientResponseDTO.getPatient_name());
+        patient.setPatientName(patientResponseDTO.getPatientName());
         patient.setPatient_mobile(patientResponseDTO.getPatient_mobile());
         patient.setPatient_email(patientResponseDTO.getPatient_email());
         patient.setPatient_address(patientResponseDTO.getPatient_address());
 
-        List<Authority> authorities = authorityService.findByName("ROLE_DOCTOR");
+        List<Authority> authorities = authorityService.findByName("ROLE_PATIENT");
         user.setAuthorities(authorities);
 
         patient.setPatient(user);

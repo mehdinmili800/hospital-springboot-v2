@@ -4,7 +4,7 @@ public class DoctorResponseDTO {
 
     private String username;
     private String password;
-    private String doctor_name;
+    private String doctorName;
     private String doctor_specialist;
     private String doctor_mobile;
     private String doctor_email;
@@ -12,10 +12,10 @@ public class DoctorResponseDTO {
 
     public DoctorResponseDTO(){}
 
-    public DoctorResponseDTO(String username, String password, String doctor_name, String doctor_specialist, String doctor_mobile, String doctor_email, String doctor_address) {
+    public DoctorResponseDTO(String username, String password, String doctorName, String doctor_specialist, String doctor_mobile, String doctor_email, String doctor_address) {
         this.username = username;
         this.password = password;
-        this.doctor_name = doctor_name;
+        this.doctorName = doctorName;
         this.doctor_specialist = doctor_specialist;
         this.doctor_mobile = doctor_mobile;
         this.doctor_email = doctor_email;
@@ -38,12 +38,12 @@ public class DoctorResponseDTO {
         this.password = password;
     }
 
-    public String getDoctor_name() {
-        return doctor_name;
+    public String getDoctorName() {
+        return doctorName;
     }
 
-    public void setDoctor_name(String doctor_name) {
-        this.doctor_name = doctor_name;
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 
     public String getDoctor_specialist() {

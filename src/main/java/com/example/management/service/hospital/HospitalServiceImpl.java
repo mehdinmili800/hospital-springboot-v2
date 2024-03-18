@@ -16,7 +16,7 @@ public class HospitalServiceImpl implements HospitalService{
     @Override
     public Hospital create(HospitalResponseDTO hospitalResponseDTO) {
         Hospital hospital = new Hospital();
-        hospital.setHospital_name(hospitalResponseDTO.getHospital_name());
+        hospital.setHospitalName(hospitalResponseDTO.getHospitalName());
         hospital.setHospital_type(hospitalResponseDTO.getHospital_type());
         hospital.setHospital_description(hospitalResponseDTO.getHospital_description());
         hospital.setHospital_place(hospitalResponseDTO.getHospital_place());

@@ -30,6 +30,7 @@ public class InitData {
             authorityService.save(UserRoleName.ROLE_PATIENT);
             authorityService.save(UserRoleName.ROLE_DOCTOR);
             authorityService.save(UserRoleName.ROLE_NURSES);
+            authorityService.save(UserRoleName.ROLE_EMPLOYEE);
             UserResponseDTO adminUser = new UserResponseDTO(username, password, "ROLE_ADMIN");
             // Generate JWT token for the default admin user
             String jwtToken = jwtService.generateToken(adminUser.toUserEntity());

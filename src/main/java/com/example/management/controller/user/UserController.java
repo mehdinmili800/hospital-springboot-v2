@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
     @PostMapping(value = "/user/create")
     public ResponseEntity<?> addUser(@RequestBody UserResponseDTO userResponseDTO){
         User user = userService.save(userResponseDTO);
@@ -32,4 +32,26 @@ public class UserController {
         List<User> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
+    @GetMapping("/user/{userId}") // Endpoint to get a user by ID
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+        User user = userService.findById(userId); // Assuming you have a method in UserServiceImpl to find user by ID
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/user/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
+        User user = userService.findById(userId);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        userService.deleteById(userId);
+        return ResponseEntity.ok("User with ID " + userId + " has been deleted successfully.");
+    }
+
 }

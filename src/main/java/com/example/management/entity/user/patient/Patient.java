@@ -1,10 +1,12 @@
 package com.example.management.entity.user.patient;
 
 import com.example.management.entity.appointment.Appointment;
+import com.example.management.entity.treatment.Treatment;
 import com.example.management.entity.user.User;
-import com.example.management.entity.user.doctor.Doctor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,22 +21,29 @@ public class Patient {
     @JoinColumn(name = "patient_id")
     private User patient;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<Appointment> appointments;
 
 
-    private String patient_name;
+
+    private String patientName;
     private String patient_mobile;
     private String patient_email;
     private String patient_address;
 
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Appointment> appointments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Treatment> treatments = new ArrayList<>();
 
 
 
-    public Patient(User patient, String patient_name,
-                   String patient_mobile, String patient_email, String patient_address) {
+    public Patient(User patient, String patientName,
+                   String patient_mobile, String patient_email,
+                   String patient_address) {
         this.patient = patient;
-        this.patient_name = patient_name;
+        this.patientName = patientName;
         this.patient_mobile = patient_mobile;
         this.patient_email = patient_email;
         this.patient_address = patient_address;
@@ -63,13 +72,12 @@ public class Patient {
     }
 
 
-
-    public String getPatient_name() {
-        return patient_name;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public void setPatient_name(String patient_name) {
-        this.patient_name = patient_name;
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 
     public String getPatient_mobile() {
@@ -102,5 +110,13 @@ public class Patient {
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    public List<Treatment> getTreatments() {
+        return treatments;
+    }
+
+    public void setTreatments(List<Treatment> treatments) {
+        this.treatments = treatments;
     }
 }

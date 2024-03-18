@@ -1,6 +1,11 @@
 package com.example.management.entity.medicines;
 
+import com.example.management.entity.treatment.Treatment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "medicines")
@@ -10,7 +15,7 @@ public class Medicines {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String medicine_name;
+    private String medicineName;
     private String medicine_company;
     private String medicine_composition;
     private String medicine_cost;
@@ -18,11 +23,15 @@ public class Medicines {
     private String medicine_dose;
     private String medicine_description;
 
+    @OneToMany(mappedBy = "medicines")
+    @JsonIgnore
+    private List<Treatment> treatments = new ArrayList<>();
 
-    public Medicines(Long id, String medicine_name, String medicine_company, String medicine_composition,
+
+    public Medicines(Long id, String medicineName, String medicine_company, String medicine_composition,
                      String medicine_cost, String medicine_type, String medicine_dose, String medicine_description) {
         this.id = id;
-        this.medicine_name = medicine_name;
+        this.medicineName = medicineName;
         this.medicine_company = medicine_company;
         this.medicine_composition = medicine_composition;
         this.medicine_cost = medicine_cost;
@@ -44,12 +53,12 @@ public class Medicines {
         this.id = id;
     }
 
-    public String getMedicine_name() {
-        return medicine_name;
+    public String getMedicineName() {
+        return medicineName;
     }
 
-    public void setMedicine_name(String medicine_name) {
-        this.medicine_name = medicine_name;
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
     }
 
     public String getMedicine_company() {
@@ -98,5 +107,13 @@ public class Medicines {
 
     public void setMedicine_description(String medicine_description) {
         this.medicine_description = medicine_description;
+    }
+
+    public List<Treatment> getTreatments() {
+        return treatments;
+    }
+
+    public void setTreatments(List<Treatment> treatments) {
+        this.treatments = treatments;
     }
 }

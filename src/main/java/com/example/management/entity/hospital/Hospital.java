@@ -1,7 +1,12 @@
 package com.example.management.entity.hospital;
 
+import com.example.management.entity.appointment.Appointment;
 import com.example.management.entity.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "hospital")
@@ -11,18 +16,23 @@ public class Hospital {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String hospital_name;
+    private String hospitalName;
     private String hospital_place;
     private String hospital_type;
     private String hospital_description;
     private String hospital_address;
 
+    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Appointment> appointments = new ArrayList<>();
 
 
-    public Hospital(Long id, String hospital_name, String hospital_place, String hospital_type,
-                    String hospital_description, String hospital_address) {
+
+    public Hospital(Long id, String hospitalName, String hospital_place, String hospital_type,
+                    String hospital_description, String hospital_address
+                    ) {
         this.id = id;
-        this.hospital_name = hospital_name;
+        this.hospitalName = hospitalName;
         this.hospital_place = hospital_place;
         this.hospital_type = hospital_type;
         this.hospital_description = hospital_description;
@@ -41,12 +51,13 @@ public class Hospital {
         this.id = id;
     }
 
-    public String getHospital_name() {
-        return hospital_name;
+
+    public String getHospitalName() {
+        return hospitalName;
     }
 
-    public void setHospital_name(String hospital_name) {
-        this.hospital_name = hospital_name;
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
     }
 
     public String getHospital_place() {
@@ -79,5 +90,13 @@ public class Hospital {
 
     public void setHospital_address(String hospital_address) {
         this.hospital_address = hospital_address;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }

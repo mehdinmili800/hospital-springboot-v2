@@ -4,7 +4,7 @@ public class MedicinesResponseDTO {
 
 
 
-    private String medicine_name;
+    private String medicineName;
     private String medicine_company;
     private String medicine_composition;
     private String medicine_cost;
@@ -14,9 +14,9 @@ public class MedicinesResponseDTO {
 
     public MedicinesResponseDTO(){}
 
-    public MedicinesResponseDTO( String medicine_name, String medicine_company,
+    public MedicinesResponseDTO( String medicineName, String medicine_company,
                                 String medicine_composition, String medicine_cost, String medicine_type, String medicine_dose, String medicine_description) {
-        this.medicine_name = medicine_name;
+        this.medicineName = medicineName;
         this.medicine_company = medicine_company;
         this.medicine_composition = medicine_composition;
         this.medicine_cost = medicine_cost;
@@ -26,13 +26,12 @@ public class MedicinesResponseDTO {
     }
 
 
-
-    public String getMedicine_name() {
-        return medicine_name;
+    public String getMedicineName() {
+        return medicineName;
     }
 
-    public void setMedicine_name(String medicine_name) {
-        this.medicine_name = medicine_name;
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
     }
 
     public String getMedicine_company() {

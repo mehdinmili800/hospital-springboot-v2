@@ -2,9 +2,11 @@ package com.example.management.entity.user;
 
 import com.example.management.config.token.TokenEntity;
 import com.example.management.entity.user.doctor.Doctor;
+import com.example.management.entity.user.employee.Employee;
 import com.example.management.entity.user.nurses.Nurses;
 import com.example.management.entity.user.patient.Patient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -39,16 +41,23 @@ public class User implements UserDetails {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
     private List<Patient> patients = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "doctor")
+
+    @JsonIgnoreProperties("doctor")
+    @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL)
     private List<Doctor> doctors = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "nurses")
     private List<Nurses> nurses = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee")
+    private List<Employee> employees = new ArrayList<>();
+
+
 
 
 
@@ -144,6 +153,7 @@ public class User implements UserDetails {
     public void setPatients(List<Patient> patients) {
         this.patients = patients;
     }
+
     public List<Doctor> getDoctors() {
         return doctors;
     }
@@ -158,5 +168,13 @@ public class User implements UserDetails {
 
     public void setNurses(List<Nurses> nurses) {
         this.nurses = nurses;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

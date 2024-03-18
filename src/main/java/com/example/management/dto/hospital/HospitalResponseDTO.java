@@ -4,7 +4,7 @@ public class HospitalResponseDTO {
 
     private Long id;
 
-    private String hospital_name;
+    private String hospitalName;
     private String hospital_place;
     private String hospital_type;
     private String hospital_description;
@@ -14,9 +14,9 @@ public class HospitalResponseDTO {
 
     }
 
-    public HospitalResponseDTO(Long id, String hospital_name, String hospital_place, String hospital_type, String hospital_description, String hospital_address) {
+    public HospitalResponseDTO(Long id, String hospitalName, String hospital_place, String hospital_type, String hospital_description, String hospital_address) {
         this.id = id;
-        this.hospital_name = hospital_name;
+        this.hospitalName = hospitalName;
         this.hospital_place = hospital_place;
         this.hospital_type = hospital_type;
         this.hospital_description = hospital_description;
@@ -31,12 +31,12 @@ public class HospitalResponseDTO {
         this.id = id;
     }
 
-    public String getHospital_name() {
-        return hospital_name;
+    public String getHospitalName() {
+        return hospitalName;
     }
 
-    public void setHospital_name(String hospital_name) {
-        this.hospital_name = hospital_name;
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
     }
 
     public String getHospital_place() {

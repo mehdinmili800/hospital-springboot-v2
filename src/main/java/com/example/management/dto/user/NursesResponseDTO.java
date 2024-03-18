@@ -5,7 +5,7 @@ public class NursesResponseDTO {
 
     private String username;
     private String password;
-    private String nurse_name;
+    private String nurseName;
     private String nurse_duty_hour;
     private String nurse_mobile;
     private String nurse_email;
@@ -13,11 +13,11 @@ public class NursesResponseDTO {
 
     public NursesResponseDTO(){}
 
-    public NursesResponseDTO(String username, String password, String nurse_name, String nurse_duty_hour,
+    public NursesResponseDTO(String username, String password, String nurseName, String nurse_duty_hour,
                              String nurse_mobile, String nurse_email, String nurse_address) {
         this.username = username;
         this.password = password;
-        this.nurse_name = nurse_name;
+        this.nurseName = nurseName;
         this.nurse_duty_hour = nurse_duty_hour;
         this.nurse_mobile = nurse_mobile;
         this.nurse_email = nurse_email;
@@ -40,12 +40,12 @@ public class NursesResponseDTO {
         this.password = password;
     }
 
-    public String getNurse_name() {
-        return nurse_name;
+    public String getNurseName() {
+        return nurseName;
     }
 
-    public void setNurse_name(String nurse_name) {
-        this.nurse_name = nurse_name;
+    public void setNurseName(String nurseName) {
+        this.nurseName = nurseName;
     }
 
     public String getNurse_duty_hour() {

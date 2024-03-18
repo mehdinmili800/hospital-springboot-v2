@@ -16,7 +16,7 @@ public class PatientController {
     @Autowired
     private PatientServiceImpl patientService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_PATIENT')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_PATIENT') or hasRole('ROLE_EMPLOYEE')")
     @PostMapping(value = "/patient/create")
     public Patient create(@RequestBody PatientResponseDTO patientResponseDTO){
         return patientService.create(patientResponseDTO);

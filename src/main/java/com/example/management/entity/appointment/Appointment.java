@@ -1,8 +1,12 @@
 package com.example.management.entity.appointment;
 
+
+import com.example.management.entity.hospital.Hospital;
 import com.example.management.entity.user.doctor.Doctor;
 import com.example.management.entity.user.nurses.Nurses;
 import com.example.management.entity.user.patient.Patient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,36 +17,45 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
-
-    @ManyToOne
-    @JoinColumn(name = "nurses_id")
-    private Nurses nurses;
-
-    @ManyToOne
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
-
-
-
     private String appointment_number;
     private String appointment_type;
     private String appointment_date;
     private String appointment_description;
 
-    public Appointment(Long id, Doctor doctor,Nurses nurses,Patient patient, String appointment_number,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctor_id")
+    @JsonIgnoreProperties("appointments")
+    private Doctor doctor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nurses_id")
+    @JsonIgnoreProperties("appointments")
+    private Nurses nurses;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_id")
+    @JsonIgnoreProperties("appointments")
+    private Patient patient;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hospital_id")
+    @JsonIgnoreProperties("appointments")
+    private Hospital hospital;
+
+    public Appointment( String appointment_number,
                        String appointment_type, String appointment_date,
-                       String appointment_description) {
-        this.id = id;
-        this.doctor = doctor;
-        this.nurses = nurses;
-        this.patient = patient;
+                       String appointment_description,Doctor doctor,
+                        Nurses nurses,Patient patient,
+                        Hospital hospital) {
+
         this.appointment_number = appointment_number;
         this.appointment_type = appointment_type;
         this.appointment_date = appointment_date;
         this.appointment_description = appointment_description;
+        this.doctor = doctor;
+        this.nurses = nurses;
+        this.patient = patient;
+        this.hospital = hospital;
     }
 
 
@@ -56,30 +69,6 @@ public class Appointment {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public Nurses getNurses() {
-        return nurses;
-    }
-
-    public void setNurses(Nurses nurses) {
-        this.nurses = nurses;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 
     public String getAppointment_number() {
@@ -112,5 +101,37 @@ public class Appointment {
 
     public void setAppointment_description(String appointment_description) {
         this.appointment_description = appointment_description;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Nurses getNurses() {
+        return nurses;
+    }
+
+    public void setNurses(Nurses nurses) {
+        this.nurses = nurses;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Hospital getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
     }
 }

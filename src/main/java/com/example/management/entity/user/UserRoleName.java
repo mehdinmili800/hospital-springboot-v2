@@ -6,5 +6,6 @@ public enum UserRoleName {
     ROLE_PATIENT,
 
     ROLE_DOCTOR,
-    ROLE_NURSES
+    ROLE_NURSES,
+    ROLE_EMPLOYEE
 }

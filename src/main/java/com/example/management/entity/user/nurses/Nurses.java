@@ -3,8 +3,10 @@ package com.example.management.entity.user.nurses;
 import com.example.management.entity.appointment.Appointment;
 import com.example.management.entity.user.User;
 import com.example.management.entity.user.doctor.Doctor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,21 +21,26 @@ public class Nurses {
     @JoinColumn(name = "nurses_id")
     private User nurses;
 
-    private String nurse_name;
+    private String nurseName;
     private String nurse_duty_hour;
     private String nurse_mobile;
     private String nurse_email;
     private String nurse_address;
 
-    @OneToMany(mappedBy = "nurses", cascade = CascadeType.ALL)
-    private List<Appointment> appointments;
+    @OneToMany(mappedBy = "nurses")
+    @JsonIgnore
+    private List<Appointment> appointments = new ArrayList<>();
 
 
-    public Nurses(Long id, User nurses, String nurse_name, String nurse_duty_hour, String nurse_mobile,
+
+
+
+
+    public Nurses(Long id, User nurses, String nurseName, String nurse_duty_hour, String nurse_mobile,
                   String nurse_email, String nurse_address) {
         this.id = id;
         this.nurses = nurses;
-        this.nurse_name = nurse_name;
+        this.nurseName = nurseName;
         this.nurse_duty_hour = nurse_duty_hour;
         this.nurse_mobile = nurse_mobile;
         this.nurse_email = nurse_email;
@@ -62,12 +69,12 @@ public class Nurses {
         this.nurses = nurses;
     }
 
-    public String getNurse_name() {
-        return nurse_name;
+    public String getNurseName() {
+        return nurseName;
     }
 
-    public void setNurse_name(String nurse_name) {
-        this.nurse_name = nurse_name;
+    public void setNurseName(String nurseName) {
+        this.nurseName = nurseName;
     }
 
     public String getNurse_duty_hour() {
@@ -101,6 +108,7 @@ public class Nurses {
     public void setNurse_address(String nurse_address) {
         this.nurse_address = nurse_address;
     }
+
 
     public List<Appointment> getAppointments() {
         return appointments;

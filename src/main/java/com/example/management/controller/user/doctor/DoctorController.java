@@ -4,6 +4,8 @@ import com.example.management.dto.user.DoctorResponseDTO;
 import com.example.management.entity.user.doctor.Doctor;
 import com.example.management.service.user.doctor.impl.DoctorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,4 +28,12 @@ public class DoctorController {
     public List<Doctor> findAll(){
         return doctorService.findALl();
     }
+
+
+    @GetMapping(value = "/doctors/{userId}")
+    public ResponseEntity<Doctor> getDoctorInfo(@PathVariable Long userId) {
+        Doctor doctor = doctorService.getDoctorInfo(userId);
+        return ResponseEntity.ok(doctor);
+    }
+
 }

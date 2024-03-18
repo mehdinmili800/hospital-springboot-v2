@@ -10,4 +10,9 @@ public interface UserService {
     User save(UserResponseDTO userResponseDTO);
 
     List<User> findAll();
+
+    User findById(Long userId); // New method declaration
+
+    void deleteById(Long userId);
+
 }

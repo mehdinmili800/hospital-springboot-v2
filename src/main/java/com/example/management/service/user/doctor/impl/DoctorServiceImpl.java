@@ -4,11 +4,13 @@ import com.example.management.dto.user.DoctorResponseDTO;
 import com.example.management.entity.user.Authority;
 import com.example.management.entity.user.User;
 import com.example.management.entity.user.doctor.Doctor;
+import com.example.management.exception.CustomException;
 import com.example.management.repository.user.UserRepository;
 import com.example.management.repository.user.doctor.DoctorRepository;
 import com.example.management.service.user.doctor.DoctorService;
 import com.example.management.service.user.user.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class DoctorServiceImpl implements DoctorService {
                 .orElseThrow(() -> new NoSuchElementException("User not found with username: "
                 + doctorResponseDTO.getUsername()));
         Doctor doctor = new Doctor();
-        doctor.setDoctor_name(doctorResponseDTO.getDoctor_name());
+        doctor.setDoctorName(doctorResponseDTO.getDoctorName());
         doctor.setDoctor_mobile(doctorResponseDTO.getDoctor_mobile());
         doctor.setDoctor_specialist(doctorResponseDTO.getDoctor_specialist());
         doctor.setDoctor_email(doctorResponseDTO.getDoctor_email());
@@ -48,4 +50,12 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.save(doctor);
         return doctor;
     }
+
+
+    @Override
+    public Doctor getDoctorInfo(Long id) {
+        return doctorRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY));
+    }
+
 }

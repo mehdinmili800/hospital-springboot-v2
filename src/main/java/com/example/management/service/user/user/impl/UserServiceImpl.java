@@ -89,6 +89,8 @@ public class UserServiceImpl implements UserService {
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .role(userRole)
+                .id(user.getId())  // تعيين الإيدي
+                .username(user.getUsername())  // تعيين اسم المستخدم
                 .build();
     }
 
@@ -102,5 +104,17 @@ public class UserServiceImpl implements UserService {
                 .build();
         tokenRepository.save(token);
     }
+
+
+    @Override
+    public User findById(Long userId) {
+        return userRepository.findById(userId).orElse(null);
+    }
+
+    @Override
+    public void deleteById(Long userId) {
+        userRepository.deleteById(userId);
+    }
+
 
 }

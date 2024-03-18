@@ -17,7 +17,7 @@ public class MedicinesServiceImpl implements MedicinesService {
     @Override
     public Medicines create(MedicinesResponseDTO medicinesResponseDTO) {
         Medicines medicines = new Medicines();
-        medicines.setMedicine_name(medicinesResponseDTO.getMedicine_name());
+        medicines.setMedicineName(medicinesResponseDTO.getMedicineName());
         medicines.setMedicine_company(medicinesResponseDTO.getMedicine_company());
         medicines.setMedicine_composition(medicinesResponseDTO.getMedicine_composition());
         medicines.setMedicine_cost(medicinesResponseDTO.getMedicine_cost());

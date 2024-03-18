@@ -1,63 +1,103 @@
 package com.example.management.dto.user;
 
 
+
+
 public class AppointmentResponseDTO {
 
-    private Long id;
-    private String appointment_number;
-    private String appointment_type;
-    private String appointment_date;
-    private String appointment_description;
 
+    private String doctorName;
+    private String nurseName;
+    private String patientName;
+    private String hospitalName;
+    private String appointmentNumber;
+    private String appointmentType;
+    private String appointmentDate;
+    private String appointmentDescription;
 
+    // Constructor, getters, and setters
 
-    public AppointmentResponseDTO(){}
-
-    public AppointmentResponseDTO(Long id, String appointment_number, String appointment_type, String appointment_date, String appointment_description) {
-        this.id = id;
-        this.appointment_number = appointment_number;
-        this.appointment_type = appointment_type;
-        this.appointment_date = appointment_date;
-        this.appointment_description = appointment_description;
+    public AppointmentResponseDTO() {
     }
 
-    public Long getId() {
-        return id;
+    public AppointmentResponseDTO(String doctorName,String nurseName,String patientName,String hospitalName,
+                                  String appointmentNumber, String appointmentType,
+                          String appointmentDate, String appointmentDescription) {
+        this.doctorName = doctorName;
+        this.nurseName = nurseName;
+        this.patientName = patientName;
+        this.appointmentNumber = appointmentNumber;
+        this.appointmentType = appointmentType;
+        this.appointmentDate = appointmentDate;
+        this.appointmentDescription = appointmentDescription;
+
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // Getters and setters...
+
+
+    public String getDoctorName() {
+        return doctorName;
     }
 
-    public String getAppointment_number() {
-        return appointment_number;
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 
-    public void setAppointment_number(String appointment_number) {
-        this.appointment_number = appointment_number;
+    public String getAppointmentNumber() {
+        return appointmentNumber;
     }
 
-    public String getAppointment_type() {
-        return appointment_type;
+    public void setAppointmentNumber(String appointmentNumber) {
+        this.appointmentNumber = appointmentNumber;
     }
 
-    public void setAppointment_type(String appointment_type) {
-        this.appointment_type = appointment_type;
+    public String getAppointmentType() {
+        return appointmentType;
     }
 
-    public String getAppointment_date() {
-        return appointment_date;
+    public void setAppointmentType(String appointmentType) {
+        this.appointmentType = appointmentType;
     }
 
-    public void setAppointment_date(String appointment_date) {
-        this.appointment_date = appointment_date;
+    public String getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public String getAppointment_description() {
-        return appointment_description;
+    public void setAppointmentDate(String appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
-    public void setAppointment_description(String appointment_description) {
-        this.appointment_description = appointment_description;
+    public String getAppointmentDescription() {
+        return appointmentDescription;
+    }
+
+    public void setAppointmentDescription(String appointmentDescription) {
+        this.appointmentDescription = appointmentDescription;
+    }
+
+
+    public String getNurseName() {
+        return nurseName;
+    }
+
+    public void setNurseName(String nurseName) {
+        this.nurseName = nurseName;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
     }
 }

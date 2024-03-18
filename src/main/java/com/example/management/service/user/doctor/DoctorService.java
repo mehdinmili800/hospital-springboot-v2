@@ -11,4 +11,7 @@ public interface DoctorService {
     List<Doctor> findALl();
 
     Doctor create(DoctorResponseDTO doctorResponseDTO);
+
+
+    Doctor getDoctorInfo(Long id);
 }

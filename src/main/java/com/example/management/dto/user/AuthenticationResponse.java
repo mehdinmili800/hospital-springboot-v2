@@ -13,15 +13,22 @@ public class AuthenticationResponse {
     @JsonProperty("refresh_token")
     private String refreshToken;
     private String role;  // إضافة حقل الرول
+    private Long id;  // إضافة حقل الإيدي
+    private String username;  // إضافة حقل اسم المستخدم
+
 
     public static AuthenticationResponseBuilder builder() {
         return new AuthenticationResponseBuilder();
     }
 
-    public AuthenticationResponse(String accessToken, String refreshToken, String role) {
+    public AuthenticationResponse(String accessToken, String refreshToken, String role,Long id,
+                                  String username) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
         this.role = role;
+        this.id = id;
+        this.username = username;
+
     }
 
     public String getAccessToken() {
@@ -46,5 +53,21 @@ public class AuthenticationResponse {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
