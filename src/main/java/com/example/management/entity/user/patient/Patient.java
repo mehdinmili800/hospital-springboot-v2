@@ -5,6 +5,7 @@ import com.example.management.entity.treatment.Treatment;
 import com.example.management.entity.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -19,10 +20,10 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id")
-    private User patient;
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 
@@ -33,20 +34,21 @@ public class Patient {
     private String patient_address;
 
 
-    @JsonManagedReference
+
+    @JsonIgnore
     @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
     private List<Appointment> appointments = new ArrayList<>();
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
     private List<Treatment> treatments = new ArrayList<>();
 
 
 
-    public Patient(User patient, String patientName,
+    public Patient(User user, String patientName,
                    String patient_mobile, String patient_email,
                    String patient_address) {
-        this.patient = patient;
+        this.user = user;
         this.patientName = patientName;
         this.patient_mobile = patient_mobile;
         this.patient_email = patient_email;
@@ -67,14 +69,13 @@ public class Patient {
     }
 
 
-    public User getPatient() {
-        return patient;
+    public User getUser() {
+        return user;
     }
 
-    public void setPatient(User patient) {
-        this.patient = patient;
+    public void setUser(User user) {
+        this.user = user;
     }
-
 
     public String getPatientName() {
         return patientName;

@@ -23,22 +23,22 @@ public class Appointment {
     private String appointment_date;
     private String appointment_description;
 
-    @JsonBackReference
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @JsonBackReference
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nurses_id")
     private Nurses nurses;
 
-    @JsonBackReference
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    @JsonBackReference
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;

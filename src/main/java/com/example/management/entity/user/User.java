@@ -41,23 +41,21 @@ public class User implements UserDetails {
 
 
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Patient> patients = new ArrayList<>();
 
 
 
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Doctor> doctors = new ArrayList<>();
 
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "nurses")
     private List<Nurses> nurses = new ArrayList<>();
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "employee")
     private List<Employee> employees = new ArrayList<>();
 

@@ -45,7 +45,7 @@ public class PatientServiceImpl implements PatientService {
         List<Authority> authorities = authorityService.findByName("ROLE_PATIENT");
         user.setAuthorities(authorities);
 
-        patient.setPatient(user);
+        patient.setUser(user);
         patientRepository.save(patient);
 
         return patient;

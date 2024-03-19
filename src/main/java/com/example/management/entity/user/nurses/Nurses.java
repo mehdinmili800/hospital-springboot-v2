@@ -5,6 +5,7 @@ import com.example.management.entity.user.User;
 import com.example.management.entity.user.doctor.Doctor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -19,7 +20,7 @@ public class Nurses {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nurses_id")
     private User nurses;
@@ -31,7 +32,7 @@ public class Nurses {
     private String nurse_address;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "nurses")
     private List<Appointment> appointments = new ArrayList<>();
 

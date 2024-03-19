@@ -23,18 +23,15 @@ public class Treatment {
     private String treatmentDate;
     private String treatmentDescription;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mediciens_id")
     private Medicines medicines;

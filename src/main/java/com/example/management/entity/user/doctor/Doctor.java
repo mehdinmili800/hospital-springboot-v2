@@ -21,10 +21,10 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "doctor_id")
-    private User doctor;
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 
@@ -38,20 +38,20 @@ public class Doctor {
     private String doctor_address;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL)
     private List<Appointment> appointments = new ArrayList<>();
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL)
     private List<Treatment> treatments =new ArrayList<>();
 
-    public Doctor(Long id,User doctor, String doctorName, String doctor_specialist, String doctor_mobile,
+    public Doctor(Long id,User user, String doctorName, String doctor_specialist, String doctor_mobile,
                   String doctor_email, String doctor_address) {
 
         this.id = id;
-        this.doctor = doctor;
+        this.user = user;
         this.doctorName = doctorName;
         this.doctor_specialist = doctor_specialist;
         this.doctor_mobile = doctor_mobile;
@@ -64,13 +64,12 @@ public class Doctor {
     }
 
 
-
-    public User getDoctor() {
-        return doctor;
+    public User getUser() {
+        return user;
     }
 
-    public void setDoctor(User doctor) {
-        this.doctor = doctor;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {

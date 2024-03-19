@@ -33,4 +33,9 @@ public class AppointmentController {
         return ResponseEntity.ok(appointments);
     }
 
+    @GetMapping("/appointment/{doctorId}")
+    public List<Appointment> getAppointmentsByDoctorId(@PathVariable Long doctorId) {
+        return appointmentService.getAppointmentsByDoctorId(doctorId);
+    }
+
 }

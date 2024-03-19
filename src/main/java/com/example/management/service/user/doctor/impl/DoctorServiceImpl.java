@@ -46,7 +46,7 @@ public class DoctorServiceImpl implements DoctorService {
         List<Authority> authorities = authorityService.findByName("ROLE_DOCTOR");
         user.setAuthorities(authorities);
 
-        doctor.setDoctor(user);
+        doctor.setUser(user);
         doctorRepository.save(doctor);
         return doctor;
     }
