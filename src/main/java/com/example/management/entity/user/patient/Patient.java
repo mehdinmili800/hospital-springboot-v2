@@ -3,7 +3,9 @@ package com.example.management.entity.user.patient;
 import com.example.management.entity.appointment.Appointment;
 import com.example.management.entity.treatment.Treatment;
 import com.example.management.entity.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,7 +19,8 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")
     private User patient;
 
@@ -29,12 +32,13 @@ public class Patient {
     private String patient_email;
     private String patient_address;
 
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Appointment> appointments = new ArrayList<>();
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Treatment> treatments = new ArrayList<>();
 
 

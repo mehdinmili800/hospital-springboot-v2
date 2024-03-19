@@ -2,6 +2,7 @@ package com.example.management.entity.user.employee;
 
 import com.example.management.entity.user.User;
 import com.example.management.entity.user.doctor.Doctor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -17,7 +18,8 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee")
     private User employee;
 

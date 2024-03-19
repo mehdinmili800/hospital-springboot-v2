@@ -5,8 +5,7 @@ import com.example.management.entity.user.doctor.Doctor;
 import com.example.management.entity.user.employee.Employee;
 import com.example.management.entity.user.nurses.Nurses;
 import com.example.management.entity.user.patient.Patient;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -40,20 +39,25 @@ public class User implements UserDetails {
     private List<Authority> authorities;
 
 
-    @JsonIgnore
+
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
     private List<Patient> patients = new ArrayList<>();
 
 
-    @JsonIgnoreProperties("doctor")
+
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL)
     private List<Doctor> doctors = new ArrayList<>();
 
-    @JsonIgnore
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "nurses")
     private List<Nurses> nurses = new ArrayList<>();
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "employee")
     private List<Employee> employees = new ArrayList<>();
 

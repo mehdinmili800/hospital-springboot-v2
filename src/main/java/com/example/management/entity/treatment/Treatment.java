@@ -3,6 +3,8 @@ package com.example.management.entity.treatment;
 import com.example.management.entity.medicines.Medicines;
 import com.example.management.entity.user.doctor.Doctor;
 import com.example.management.entity.user.patient.Patient;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -21,19 +23,20 @@ public class Treatment {
     private String treatmentDate;
     private String treatmentDescription;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id")
-    @JsonIgnoreProperties("treatments")
     private Doctor doctor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")
-    @JsonIgnoreProperties("treatments")
     private Patient patient;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mediciens_id")
-    @JsonIgnoreProperties("treatments")
     private Medicines medicines;
 
 

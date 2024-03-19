@@ -5,6 +5,7 @@ import com.example.management.entity.hospital.Hospital;
 import com.example.management.entity.user.doctor.Doctor;
 import com.example.management.entity.user.nurses.Nurses;
 import com.example.management.entity.user.patient.Patient;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -22,24 +23,24 @@ public class Appointment {
     private String appointment_date;
     private String appointment_description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id")
-    @JsonIgnoreProperties("appointments")
     private Doctor doctor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "nurses_id")
-    @JsonIgnoreProperties("appointments")
     private Nurses nurses;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")
-    @JsonIgnoreProperties("appointments")
     private Patient patient;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hospital_id")
-    @JsonIgnoreProperties("appointments")
     private Hospital hospital;
 
     public Appointment( String appointment_number,
