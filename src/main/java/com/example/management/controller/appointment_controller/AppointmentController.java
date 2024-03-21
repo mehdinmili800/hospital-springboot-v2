@@ -1,14 +1,12 @@
 package com.example.management.controller.appointment_controller;
 
-import com.example.management.dto.user.AppointmentResponseDTO;
+import com.example.management.dto.appointment.request.AppointmentCreationRequest;
 import com.example.management.entity.appointment.Appointment;
-import com.example.management.entity.hospital.Hospital;
-import com.example.management.entity.user.doctor.Doctor;
-import com.example.management.service.appointmnent.impl.AppointmentServiceImpl;
+
+import com.example.management.service.appointmnent.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,25 +15,41 @@ import java.util.List;
 @RequestMapping(value = "/api")
 public class AppointmentController {
 
-    @Autowired
-    private AppointmentServiceImpl appointmentService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')")
-    @PostMapping(value = "/appointment/create")
-    public Appointment create(@RequestBody AppointmentResponseDTO appointmentResponseDTO){
-        return appointmentService.create(appointmentResponseDTO);
+    private final AppointmentService appointmentService;
+
+    @Autowired
+    public AppointmentController(AppointmentService appointmentService) {
+        this.appointmentService = appointmentService;
     }
 
+    @PostMapping("/appointment/create")
+    public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentCreationRequest request) {
+        Appointment savedAppointment = appointmentService.save(
+                request.getAppointment(),
+                request.getDoctorUsername(),
+                request.getNurseUsername(),
+                request.getPatientUsername(),
+                request.getHospitalName()
+        );
+        return ResponseEntity.ok(savedAppointment);
+    }
 
     @GetMapping("/appointment/all")
     public ResponseEntity<List<Appointment>> getAllAppointments() {
-        List<Appointment> appointments = appointmentService.getAllAppointments();
-        return ResponseEntity.ok(appointments);
+        List<Appointment> appointments = appointmentService.findAll();
+        return ResponseEntity.ok().body(appointments);
     }
 
-    @GetMapping("/appointment/{doctorId}")
-    public List<Appointment> getAppointmentsByDoctorId(@PathVariable Long doctorId) {
-        return appointmentService.getAppointmentsByDoctorId(doctorId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAppointment(@PathVariable Long id) {
+        appointmentService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/appointment/user/{userId}")
+    public ResponseEntity<List<Appointment>> getAppointmentsByUserId(@PathVariable Long userId) {
+        List<Appointment> appointments = appointmentService.findAppointmentsByUserId(userId);
+        return ResponseEntity.ok().body(appointments);
+    }
 }

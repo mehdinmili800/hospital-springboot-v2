@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface HospitalRepository extends JpaRepository<Hospital,Long> {
 
-    Optional<Hospital> findByHospitalName(String hospitalName);
+    Hospital findByHospitalName(String hospitalName);
 }

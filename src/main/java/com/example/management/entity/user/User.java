@@ -1,10 +1,8 @@
 package com.example.management.entity.user;
 
 import com.example.management.config.token.TokenEntity;
-import com.example.management.entity.user.doctor.Doctor;
-import com.example.management.entity.user.employee.Employee;
-import com.example.management.entity.user.nurses.Nurses;
-import com.example.management.entity.user.patient.Patient;
+
+import com.example.management.entity.appointment.Appointment;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
@@ -42,22 +40,6 @@ public class User implements UserDetails {
 
 
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Patient> patients = new ArrayList<>();
-
-
-
-
-
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Doctor> doctors = new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "nurses")
-    private List<Nurses> nurses = new ArrayList<>();
-
-    @OneToMany(mappedBy = "employee")
-    private List<Employee> employees = new ArrayList<>();
 
 
 
@@ -148,35 +130,5 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public List<Patient> getPatients() {
-        return patients;
-    }
 
-    public void setPatients(List<Patient> patients) {
-        this.patients = patients;
-    }
-
-    public List<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
-    }
-
-    public List<Nurses> getNurses() {
-        return nurses;
-    }
-
-    public void setNurses(List<Nurses> nurses) {
-        this.nurses = nurses;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
 }

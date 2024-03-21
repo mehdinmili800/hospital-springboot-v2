@@ -1,73 +1,48 @@
 package com.example.management.service.treatment;
 
-import com.example.management.dto.treatment.TreatmentResponseDTO;
 import com.example.management.entity.medicines.Medicines;
 import com.example.management.entity.treatment.Treatment;
-import com.example.management.entity.user.doctor.Doctor;
-import com.example.management.entity.user.patient.Patient;
+import com.example.management.entity.user.User;
 import com.example.management.repository.medicines.MedicinesRepository;
 import com.example.management.repository.treatment.TreatmentRepository;
-import com.example.management.repository.user.doctor.DoctorRepository;
-import com.example.management.repository.user.patient.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.management.service.user.user.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class TreatmentServiceImpl implements TreatmentService {
+@AllArgsConstructor
+public class TreatmentServiceImpl implements TreatmentService{
 
-    @Autowired
-    private TreatmentRepository treatmentRepository;
-    @Autowired
-    private DoctorRepository doctorRepository;
-    @Autowired
-    private PatientRepository patientRepository;
-    @Autowired
-    private MedicinesRepository medicinesRepository;
-
-
+    private final TreatmentRepository treatmentRepository;
+    private final UserService userService;
+    private final MedicinesRepository medicinesRepository;
 
     @Override
-    public Treatment create(TreatmentResponseDTO treatmentResponseDTO) {
-        String treatmentName = treatmentResponseDTO.getTreatmentName();
-        String treatmentNumber = treatmentResponseDTO.getTreatmentNumber();
-        String treatmentType = treatmentResponseDTO.getTreatmentType();
-        String treatmentDate = treatmentResponseDTO.getTreatmentDate();
-        String treatmentDescription = treatmentResponseDTO.getTreatmentDescription();
+    public Treatment save(Treatment treatment, String doctorUsername, String nurseUsername,
+                          String patientUsername, String medicinesName) {
+        User doctor = userService.findByUsername(doctorUsername);
+        User nurse = userService.findByUsername(nurseUsername);
+        User patient = userService.findByUsername(patientUsername);
+        Medicines medicines = medicinesRepository.findByMedicineName(medicinesName);
 
-        String doctorName = treatmentResponseDTO.getDoctorName();
-        String patientName = treatmentResponseDTO.getPatientName();
-        String medicineName = treatmentResponseDTO.getMedicineName();
-
-        Optional<Doctor> doctorOptional = doctorRepository.findByDoctorName(doctorName);
-        if (!doctorOptional.isPresent()){
-            throw new RuntimeException("Doctor not found with id: " + doctorName);
-        }
-
-        Optional<Patient> patientOptional = patientRepository.findByPatientName(patientName);
-        if (!doctorOptional.isPresent()){
-            throw new RuntimeException("Patient not found with id: " + patientName);
-        }
-
-        Optional<Medicines> medicinesOptional = medicinesRepository.findByMedicineName(medicineName);
-        if (!medicinesOptional.isPresent()){
-            throw  new RuntimeException("Medicines not found with id: " + medicineName);
-        }
-
-        Doctor doctor = doctorOptional.get();
-        Patient patient = patientOptional.get();
-        Medicines medicines = medicinesOptional.get();
-
-        Treatment treatment = new Treatment(treatmentName,treatmentNumber,treatmentType,
-                treatmentDate,treatmentDescription,doctor,patient,medicines);
-
+        treatment.setDoctor(doctor);
+        treatment.setNurse(nurse);
+        treatment.setPatient(patient);
+        treatment.setMedicines(medicines);
         return treatmentRepository.save(treatment);
     }
 
     @Override
-    public List<Treatment> getAllTreatment() {
+    public List<Treatment> findAll() {
         return treatmentRepository.findAll();
     }
+
+    @Override
+    public List<Treatment> findTreatmentByUserId(Long userId) {
+        return treatmentRepository.findByDoctorIdOrNurseIdOrPatientIdOrMedicinesId(userId,userId,userId,userId);
+    }
+
+
 }

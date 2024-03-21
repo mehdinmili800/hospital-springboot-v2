@@ -2,13 +2,11 @@ package com.example.management.entity.appointment;
 
 
 import com.example.management.entity.hospital.Hospital;
-import com.example.management.entity.user.doctor.Doctor;
-import com.example.management.entity.user.nurses.Nurses;
-import com.example.management.entity.user.patient.Patient;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.example.management.entity.user.User;
+
 import jakarta.persistence.*;
+
+import java.util.Optional;
 
 @Entity
 @Table(name = "appointment")
@@ -18,43 +16,42 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String appointment_number;
-    private String appointment_type;
-    private String appointment_date;
-    private String appointment_description;
+    private String appointmentNumber;
+    private String appointmentType;
+    private String appointmentDate;
+    private String appointmentDescription;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    private User doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "nurse_id")
+    private User nurse;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "nurses_id")
-    private Nurses nurses;
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "patient_id")
-    private Patient patient;
+    private User patient;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    public Appointment( String appointment_number,
-                       String appointment_type, String appointment_date,
-                       String appointment_description,Doctor doctor,
-                        Nurses nurses,Patient patient,
+    public Appointment( String appointmentNumber,
+                       String appointmentType, String appointmentDate,
+                       String appointmentDescription,
+                        User doctor, User nurse,User patient,
                         Hospital hospital) {
 
-        this.appointment_number = appointment_number;
-        this.appointment_type = appointment_type;
-        this.appointment_date = appointment_date;
-        this.appointment_description = appointment_description;
+        this.appointmentNumber = appointmentNumber;
+        this.appointmentType = appointmentType;
+        this.appointmentDate = appointmentDate;
+        this.appointmentDescription = appointmentDescription;
         this.doctor = doctor;
-        this.nurses = nurses;
+        this.nurse = nurse;
         this.patient = patient;
         this.hospital = hospital;
     }
@@ -72,60 +69,36 @@ public class Appointment {
         this.id = id;
     }
 
-    public String getAppointment_number() {
-        return appointment_number;
+    public String getAppointmentNumber() {
+        return appointmentNumber;
     }
 
-    public void setAppointment_number(String appointment_number) {
-        this.appointment_number = appointment_number;
+    public void setAppointmentNumber(String appointmentNumber) {
+        this.appointmentNumber = appointmentNumber;
     }
 
-    public String getAppointment_type() {
-        return appointment_type;
+    public String getAppointmentType() {
+        return appointmentType;
     }
 
-    public void setAppointment_type(String appointment_type) {
-        this.appointment_type = appointment_type;
+    public void setAppointmentType(String appointmentType) {
+        this.appointmentType = appointmentType;
     }
 
-    public String getAppointment_date() {
-        return appointment_date;
+    public String getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public void setAppointment_date(String appointment_date) {
-        this.appointment_date = appointment_date;
+    public void setAppointmentDate(String appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
-    public String getAppointment_description() {
-        return appointment_description;
+    public String getAppointmentDescription() {
+        return appointmentDescription;
     }
 
-    public void setAppointment_description(String appointment_description) {
-        this.appointment_description = appointment_description;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public Nurses getNurses() {
-        return nurses;
-    }
-
-    public void setNurses(Nurses nurses) {
-        this.nurses = nurses;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setAppointmentDescription(String appointmentDescription) {
+        this.appointmentDescription = appointmentDescription;
     }
 
     public Hospital getHospital() {
@@ -134,5 +107,29 @@ public class Appointment {
 
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
+    }
+
+    public User getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(User doctor) {
+        this.doctor = doctor;
+    }
+
+    public User getNurse() {
+        return nurse;
+    }
+
+    public void setNurse(User nurse) {
+        this.nurse = nurse;
+    }
+
+    public User getPatient() {
+        return patient;
+    }
+
+    public void setPatient(User patient) {
+        this.patient = patient;
     }
 }

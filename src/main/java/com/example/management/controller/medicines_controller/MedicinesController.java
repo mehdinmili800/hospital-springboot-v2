@@ -1,7 +1,8 @@
-package com.example.management.controller.mediciens_controller;
+package com.example.management.controller.medicines_controller;
 
 import com.example.management.dto.user.MedicinesResponseDTO;
 import com.example.management.entity.medicines.Medicines;
+import com.example.management.service.hospital.HospitalServiceImpl;
 import com.example.management.service.medicines.MedicinesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,4 +27,5 @@ public class MedicinesController {
     public List<Medicines> findAll(){
         return medicinesService.findAll();
     }
+
 }

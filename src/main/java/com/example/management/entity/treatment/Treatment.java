@@ -1,11 +1,8 @@
 package com.example.management.entity.treatment;
 
 import com.example.management.entity.medicines.Medicines;
-import com.example.management.entity.user.doctor.Doctor;
-import com.example.management.entity.user.patient.Patient;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.example.management.entity.user.User;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,31 +20,37 @@ public class Treatment {
     private String treatmentDate;
     private String treatmentDescription;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    private User doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "nurse_id")
+    private User nurse;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "patient_id")
-    private Patient patient;
+    private User patient;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "mediciens_id")
     private Medicines medicines;
 
 
     public Treatment(String treatmentName, String treatmentNumber, String treatmentType, String treatmentDate,
-                     String treatmentDescription,Doctor doctor,Patient patient,Medicines medicines) {
+                     String treatmentDescription,
+                     Medicines medicines,User doctor,User nurse,User patient) {
 
         this.treatmentName = treatmentName;
         this.treatmentNumber = treatmentNumber;
         this.treatmentType = treatmentType;
         this.treatmentDate = treatmentDate;
         this.treatmentDescription = treatmentDescription;
-        this.doctor = doctor;
-        this.patient = patient;
         this.medicines = medicines;
+        this.doctor = doctor;
+        this.nurse = nurse;
+        this.patient = patient;
     }
 
     public Treatment() {
@@ -102,21 +105,7 @@ public class Treatment {
         this.treatmentDescription = treatmentDescription;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
 
     public Medicines getMedicines() {
         return medicines;
@@ -124,5 +113,29 @@ public class Treatment {
 
     public void setMedicines(Medicines medicines) {
         this.medicines = medicines;
+    }
+
+    public User getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(User doctor) {
+        this.doctor = doctor;
+    }
+
+    public User getNurse() {
+        return nurse;
+    }
+
+    public void setNurse(User nurse) {
+        this.nurse = nurse;
+    }
+
+    public User getPatient() {
+        return patient;
+    }
+
+    public void setPatient(User patient) {
+        this.patient = patient;
     }
 }

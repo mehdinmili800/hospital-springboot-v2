@@ -1,17 +1,18 @@
 package com.example.management.service.appointmnent;
 
-import com.example.management.dto.user.AppointmentResponseDTO;
 import com.example.management.entity.appointment.Appointment;
-import com.example.management.entity.user.doctor.Doctor;
 
 import java.util.List;
 
 public interface AppointmentService {
 
-    Appointment create(AppointmentResponseDTO appointmentDTO);
+    Appointment save(Appointment appointment, String doctorUsername, String nurseUsername,
+                     String patientUsername,String hospitalName);
+    List<Appointment> findAll();
 
-    List<Appointment> getAllAppointments();
+    void deleteById(Long id);
+
+    List<Appointment> findAppointmentsByUserId(Long userId);
 
 
-    List<Appointment> getAppointmentsByDoctorId(Long doctorId);
 }

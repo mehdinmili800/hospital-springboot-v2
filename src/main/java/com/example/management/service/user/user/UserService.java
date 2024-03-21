@@ -4,6 +4,7 @@ import com.example.management.dto.user.UserResponseDTO;
 import com.example.management.entity.user.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -14,5 +15,7 @@ public interface UserService {
     User findById(Long userId); // New method declaration
 
     void deleteById(Long userId);
+
+    User findByUsername(String username);
 
 }

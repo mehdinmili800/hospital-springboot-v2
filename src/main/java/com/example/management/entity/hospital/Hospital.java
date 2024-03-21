@@ -22,9 +22,7 @@ public class Hospital {
     private String hospital_description;
     private String hospital_address;
 
-    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Appointment> appointments = new ArrayList<>();
+
 
 
 
@@ -92,11 +90,5 @@ public class Hospital {
         this.hospital_address = hospital_address;
     }
 
-    public List<Appointment> getAppointments() {
-        return appointments;
-    }
 
-    public void setAppointments(List<Appointment> appointments) {
-        this.appointments = appointments;
-    }
 }

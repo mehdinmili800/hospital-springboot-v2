@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MedicinesServiceImpl implements MedicinesService {
+public class MedicinesServiceImpl implements MedicinesService{
 
     @Autowired
     private MedicinesRepository medicinesRepository;
@@ -24,6 +24,7 @@ public class MedicinesServiceImpl implements MedicinesService {
         medicines.setMedicine_type(medicinesResponseDTO.getMedicine_type());
         medicines.setMedicine_dose(medicinesResponseDTO.getMedicine_dose());
         medicines.setMedicine_description(medicinesResponseDTO.getMedicine_description());
+
         return medicinesRepository.save(medicines);
     }
 
