@@ -7,9 +7,13 @@ import com.example.management.config.token.TokenType;
 import com.example.management.dto.user.AuthenticationResponse;
 import com.example.management.dto.user.UserResponseDTO;
 import com.example.management.dto.user.request.AuthenticationRequest;
+import com.example.management.entity.appointment.Appointment;
+import com.example.management.entity.treatment.Treatment;
 import com.example.management.entity.user.Authority;
 import com.example.management.entity.user.User;
 import com.example.management.exception.CustomException;
+import com.example.management.repository.appointment.AppointmentRepository;
+import com.example.management.repository.treatment.TreatmentRepository;
 import com.example.management.repository.user.UserRepository;
 import com.example.management.service.user.user.AuthorityService;
 import com.example.management.service.user.user.UserService;
@@ -32,6 +36,11 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private AuthorityService authService;
+
+    @Autowired
+    private final AppointmentRepository appointmentRepository;
+    @Autowired
+    private final TreatmentRepository treatmentRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -113,8 +122,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(Long userId) {
+    public void deleteUserById(Long userId) {
+        // العثور على جميع المواعيد المرتبطة بالمستخدم
+        List<Appointment> appointments =
+                appointmentRepository.findByDoctorIdOrNurseIdOrPatientIdOrHospitalId(userId, userId, userId,userId);
+
+        List<Treatment> treatments =
+                treatmentRepository.findByDoctorIdOrNurseIdOrPatientIdOrMedicinesId(userId, userId, userId,userId);
+
+        treatmentRepository.deleteAll(treatments);
+
+        // حذف المواعيد المرتبطة بالمستخدم
+        appointmentRepository.deleteAll(appointments);
+
+        // حذف المستخدم بعد حذف المواعيد
         userRepository.deleteById(userId);
+
     }
 
 

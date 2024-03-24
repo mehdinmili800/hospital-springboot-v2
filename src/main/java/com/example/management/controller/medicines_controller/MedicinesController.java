@@ -5,6 +5,7 @@ import com.example.management.entity.medicines.Medicines;
 import com.example.management.service.hospital.HospitalServiceImpl;
 import com.example.management.service.medicines.MedicinesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,12 @@ public class MedicinesController {
     @GetMapping(value = "/medicines/all")
     public List<Medicines> findAll(){
         return medicinesService.findAll();
+    }
+
+    @DeleteMapping("/medicines/{id}")
+    public ResponseEntity<Void> deleteMedicines(@PathVariable Long id) {
+        medicinesService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
 }

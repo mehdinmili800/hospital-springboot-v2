@@ -43,4 +43,11 @@ public class TreatmentController {
         List<Treatment> treatments = treatmentService.findTreatmentByUserId(userId);
         return ResponseEntity.ok().body(treatments);
     }
+
+    @DeleteMapping("/treatment/{id}")
+    public ResponseEntity<Void> deleteTreatment(@PathVariable Long id) {
+        treatmentService.deleteById(id);
+        return ResponseEntity.ok().build();
+
+    }
 }

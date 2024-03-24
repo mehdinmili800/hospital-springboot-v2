@@ -10,4 +10,6 @@ public interface MedicinesService {
     Medicines create(MedicinesResponseDTO medicinesResponseDTO);
 
     List<Medicines> findAll();
+
+    void deleteById(Long id);
 }

@@ -11,5 +11,8 @@ public interface TreatmentService {
 
     List<Treatment> findAll();
 
+    void deleteById(Long id);
+
     List<Treatment> findTreatmentByUserId(Long userId);
+
 }

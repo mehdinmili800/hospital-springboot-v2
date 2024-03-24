@@ -41,10 +41,10 @@ public class AppointmentController {
         return ResponseEntity.ok().body(appointments);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/appointment/{id}")
     public ResponseEntity<Void> deleteAppointment(@PathVariable Long id) {
         appointmentService.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/appointment/user/{userId}")

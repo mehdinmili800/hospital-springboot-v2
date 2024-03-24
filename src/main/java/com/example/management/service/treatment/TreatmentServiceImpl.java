@@ -40,6 +40,11 @@ public class TreatmentServiceImpl implements TreatmentService{
     }
 
     @Override
+    public void deleteById(Long id) {
+        treatmentRepository.deleteById(id);
+    }
+
+    @Override
     public List<Treatment> findTreatmentByUserId(Long userId) {
         return treatmentRepository.findByDoctorIdOrNurseIdOrPatientIdOrMedicinesId(userId,userId,userId,userId);
     }

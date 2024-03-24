@@ -10,4 +10,6 @@ public interface HospitalService {
     Hospital create(HospitalResponseDTO hospitalResponseDTO);
 
     List<Hospital> findAll();
+
+    void deleteById(Long id);
 }

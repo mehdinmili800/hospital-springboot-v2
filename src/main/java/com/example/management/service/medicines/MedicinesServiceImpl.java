@@ -32,4 +32,9 @@ public class MedicinesServiceImpl implements MedicinesService{
     public List<Medicines> findAll() {
         return medicinesRepository.findAll();
     }
+
+    @Override
+    public void deleteById(Long id) {
+        medicinesRepository.deleteById(id);
+    }
 }

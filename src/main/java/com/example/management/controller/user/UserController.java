@@ -50,7 +50,7 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 
-        userService.deleteById(userId);
+        userService.deleteUserById(userId);
         return ResponseEntity.ok("User with ID " + userId + " has been deleted successfully.");
     }
 
